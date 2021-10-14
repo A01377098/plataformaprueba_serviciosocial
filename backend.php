@@ -1,10 +1,17 @@
 <?php
-$servername = "localhost";
+/*$servername = "localhost";
 $username  = "id17679843_userhaci";
 $password = "J#sZ5~a+dT41K(lX";
-$dbname = "id17679843_dbphaci";
+$dbname = "id17679843_dbphaci"; */
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+class DataSystem {
+  const dbHost = 'localhost';
+  const dbUser = 'id17679843_userhaci';
+  const dbPwd = 'J#sZ5~a+dT41K(lX';
+  const dbName = 'id17679843_dbphaci';
+}
+
+/*$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -14,6 +21,7 @@ if ($conn->connect_error) {
 $useremail = $_POST['useremail'];
 $userpassword = $_POST['userpassword'];*/
 
+/*
 $strData = $_POST['strData'];
 $dataDecode64 = base64_decode($strData);
 $dataDecodeJson = json_decode($dataDecode64);
@@ -37,6 +45,6 @@ if ($conn->query($sql) === TRUE) {
 }
 echo($strEcho);
 
-
 $conn->close();
+*/
 ?>
