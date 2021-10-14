@@ -6,9 +6,17 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wdth,wght@100,700;101.2,842&family=Italianno&display=swap" rel="stylesheet">
 
 <style>
-body,h1 {font-family: "Raleway", sans-serif}
+/*body,h1 {font-family: "Raleway", sans-serif;  FUENTE ORIGINAL DE LA PLANTILLA */
+/*font-family: 'Inconsolata', monospace;
+font-family: 'Italianno', cursive;} */
+.fuente1{font-family: 'Inconsolata', monospace;}
+.fuente2{font-family: 'Italianno', cursive;}
+
 body, html {height: 100%}
 .bgimg {
   background-image: url('michote.png');
@@ -18,47 +26,61 @@ body, html {height: 100%}
 }
 </style>
 <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 	<script src="jquery.md5.js"></script>
 	<script>
-	//alert('hola'); //Se encarga de descargar toda la info 
 	$(document).ready(function(){
-	$('#btnEnviar').click(function(a){
+		$('#btnEnviar').click(function(a){
 		var b = document.getElementsByTagName('form')[0];
-		if(b.checkValidity())
-		{
+		if (b.checkValidity()) {
 			usernombre = $('#usernombre').val();
 			useremail = $('#useremail').val();
 			userpassword = $.md5($('#userpassword').val());
-	
+
 			objJson = {
-				usernombre:usernombre, 
-				useremail:useremail, 
-				userpassword:userpassword
-			}
-
+			usernombre:usernombre,
+			useremail:useremail,
+			userpassword:userpassword
+			}  
+			
 			strJson = JSON.stringify(objJson);
-			strJson64 = btoa(strJson)
-			//alert(btoa(strJson));
-			$.post("backend.php",{strData:strJson64}, function(r){
-				alert(r);
-			});
-		a.preventDefault();
+			strJsonB64 = btoa(strJson);
+			// alert(btoa(strJson));
 
+			$.post("backend.php", {strData:strJsonB64}, function(strEcho){
+				strEcho=atob(strEcho)
+				objJson = JSON.parse(strEcho);
+
+				alert(objJson.desc);
+			});
+			a.preventDefault();
 		}
-	});
+		});
+
 	});
 	</script>
-	<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-	<div class="w3-display-middle">
-		<form class="w3-container">
-		<p><label>Nombre Completo</label><input name="usernombre" class="w3-input"  type="text" maxlength="40" required></p>
-		<p><label>Correo electronico </label><input name="useremail" class="w3-input"  type="email" maxlength="50" required></p>
-		<p>
-		<label>Contraseña</label><input name="userpassword" class="w3-input" type="password" minlength="8" maxlength="24" required></p>
-		<button id="btnEnviar" class="w3-button w3-purple">Enviar</button>
-		</form>
-
+	<div class="bgimg w3-animate-opacity w3-text-white">
+		<div class= "w3-padding-large w3-xlarge">
+			DENISSE VARGAS
+		</div>
+		<div class="w3-row">
+			<div class="w3-third w3-container">
+				
+			</div>
+			<div class="w3-third w3-container"> <!-- El contenedor de en medio -->
+				<h1>Capacitación - A01377098</h1>
+				<form class="w3-container">
+					<p><label class="fuente1 w3-large">Nombre Completo</label><input id="usernombre" class="w3-input"  type="text" maxlength="40" placeholder="Escribe tu nombre:" required></p>
+					<p><label class="fuente2 w3-large">Correo electronico </label><input id="useremail" class="w3-input"  type="email" maxlength="50" placeholder="Escribe tu correo" required></p>
+					<p>
+					<label>Contraseña</label><input id="userpassword" class="w3-input" type="password" minlength="8" maxlength="24" placeholder="Escribe tu contraseña" required></p>
+					<button id="btnEnviar" class="w3-button w3-purple">Enviar</button>
+				</form>
+			</div>
+			<div class="w3-third w3-container">
+				
+			</div>
+		</div>
 	</div>
 
 </body>

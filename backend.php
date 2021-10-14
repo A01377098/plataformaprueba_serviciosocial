@@ -24,9 +24,19 @@ $userpassword = $dataDecodeJson->{'userpassword'};
 $sql = "INSERT INTO user_pHaCi (nameUhc, emailUhc, pwUhc) VALUES ('$usernombre', '$useremail', '$userpassword');";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
+  $arrJson = array("code"=>"200", "desc"=>"ok");
+  $strEcho = json_encode($arrJson);
+  $strEcho = base64_encode($strEcho);
+  //$strEcho "{code:200, desc:ok}";
+} else {
+  $arrJson = array("code"=>"500", "desc"=>$sql.", ".$conn->error);
+  $strEcho = json_encode($arrJson);
+  $strEcho = base64_encode($strEcho);
+  
+  //$strEchoecho "{code:500, desc:Internal Server Error: $sql+$conn->error}";
+}
+echo($strEcho);
+
+
 $conn->close();
 ?>
